@@ -17,6 +17,7 @@ impl Default for StatBarBorder {
     }
 }
 
+/// not used for now
 #[derive(Component)]
 pub struct StatBarOrientation {
     pub quat: Quat,
@@ -48,6 +49,7 @@ impl Default for StatBarColor {
     }
 }
 
+/// not used for now
 #[derive(Component)]
 pub struct StatBarAlignment(pub Vec2);
 
