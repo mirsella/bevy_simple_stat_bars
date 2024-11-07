@@ -82,6 +82,7 @@ fn spawn_player(mut commands: Commands) {
             },
             StatBarSubject(player),
             StatBarPosition(50.0 * Vec2::Y),
+            Visibility::Visible,
         ))
         .id();
 
@@ -144,15 +145,29 @@ fn update_stats(
 
 fn update_bars(
     mut stats: Query<(&mut Hp, &mut Mp, &StatBars)>,
-    mut stat_bars: Query<&mut StatBarValue>,
+    mut stat_bars: Query<(&mut StatBarValue, Option<&mut Visibility>)>,
 ) {
     for (hp, mp, bars) in stats.iter_mut() {
-        if let Ok(mut hp_bar) = stat_bars.get_mut(bars.hp) {
+        if let Ok((mut hp_bar, visibility)) = stat_bars.get_mut(bars.hp) {
             hp_bar.0 = hp.current as f32 / hp.max as f32;
+            if let Some(mut visibility) = visibility {
+                if hp_bar.0 == 1. {
+                    *visibility = Visibility::Hidden
+                } else {
+                    *visibility = Visibility::Visible
+                }
+            }
         }
 
-        if let Ok(mut mp_bar) = stat_bars.get_mut(bars.mp) {
+        if let Ok((mut mp_bar, visibility)) = stat_bars.get_mut(bars.mp) {
             mp_bar.0 = mp.current as f32 / mp.max as f32;
+            if let Some(mut visibility) = visibility {
+                if mp_bar.0 == 1. {
+                    *visibility = Visibility::Hidden
+                } else {
+                    *visibility = Visibility::Visible
+                }
+            }
         }
     }
 }
