@@ -1,12 +1,12 @@
 use crate::prelude::*;
 
-/// basic components 
+/// basic components
 /// required by all stat bars
 pub struct StatBarRequiredBundle {
     pub color: StatBarColor,
     pub value: StatBarValue,
     pub size: StatBarSize,
-    pub subject: StatBarSubject
+    pub subject: StatBarSubject,
 }
 
 pub struct StatBarBundle {
@@ -16,5 +16,5 @@ pub struct StatBarBundle {
     pub value: StatBarValue,
     pub size: StatBarSize,
     pub subject: StatBarSubject,
-    pub position: StatBarPosition
+    pub position: StatBarPosition,
 }

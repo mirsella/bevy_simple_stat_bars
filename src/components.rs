@@ -1,3 +1,5 @@
+use bevy::color::palettes::css;
+
 use crate::*;
 
 #[derive(Component)]
@@ -8,22 +10,22 @@ pub struct StatBarBorder {
 
 impl Default for StatBarBorder {
     fn default() -> Self {
-        Self { 
-            color: Color::DARK_GRAY,
-            thickness: 2.0
+        Self {
+            color: css::DARK_GRAY.into(),
+            thickness: 2.0,
         }
-    } 
+    }
 }
 
 #[derive(Component)]
 pub struct StatBarOrientation {
-    pub quat: Quat
+    pub quat: Quat,
 }
 
 impl Default for StatBarOrientation {
     fn default() -> Self {
         Self {
-            quat: Quat::IDENTITY
+            quat: Quat::IDENTITY,
         }
     }
 }
@@ -55,8 +57,7 @@ impl Default for StatBarAlignment {
     }
 }
 
-#[derive(Clone, Copy)]
-#[derive(Component)]
+#[derive(Clone, Copy, Component)]
 pub struct StatBarSize {
     pub full_length: f32,
     pub thickness: f32,
@@ -70,7 +71,6 @@ impl Default for StatBarSize {
         }
     }
 }
-
 
 #[derive(Component)]
 pub struct StatBarZDepth(pub f32);
