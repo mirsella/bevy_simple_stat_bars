@@ -95,3 +95,6 @@ pub struct StatBarSubject(pub Entity);
 
 #[derive(Component)]
 pub struct StatBarPosition(pub Vec2);
+
+#[derive(Component)]
+pub struct StatBarVisibility(pub Visibility);

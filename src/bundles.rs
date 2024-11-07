@@ -17,4 +17,5 @@ pub struct StatBarBundle {
     pub size: StatBarSize,
     pub subject: StatBarSubject,
     pub position: StatBarPosition,
+    pub visiblity: StatBarVisibility,
 }
