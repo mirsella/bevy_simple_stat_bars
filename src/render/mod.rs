@@ -95,7 +95,6 @@ fn extract_status_bars(
             }
 
             if 0.0 < value {
-                println!("spawning bar");
                 let clamped_value = value.clamp(0.0, 1.0);
                 let bar_size = clamped_value * inner_size.x * Vec2::X + inner_size.y * Vec2::Y;
                 let bar_translation =
