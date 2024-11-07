@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use bevy::prelude::*;
 
 /// basic components
 /// required by all stat bars
