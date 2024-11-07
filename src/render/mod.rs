@@ -8,7 +8,9 @@ use bevy::sprite::SpriteSystem;
 
 const DEFAULT_BAR_Z_DEPTH: f32 = 950.0;
 
+#[allow(clippy::type_complexity)]
 fn extract_status_bars(
+    mut commands: Commands,
     mut extracted_sprites: ResMut<ExtractedSprites>,
     subject_query: Extract<Query<&GlobalTransform>>,
     status_bar_query: Extract<
@@ -53,11 +55,14 @@ fn extract_status_bars(
             if let Some(border) = border_option {
                 let border_size = inner_size + border.thickness * Vec2::ONE;
 
+                let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    subject,
+                    new_entity,
                     ExtractedSprite {
                         original_entity: Some(subject),
-                        transform: GlobalTransform::from_translation(translation),
+                        transform: GlobalTransform::from_translation(
+                            translation.with_z(translation.z - 2.),
+                        ),
                         color: border.color.into(),
                         rect: None,
                         custom_size: Some(border_size),
@@ -70,11 +75,14 @@ fn extract_status_bars(
             }
 
             if let Some(empty_color) = empty_color_option {
+                let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    subject,
+                    new_entity,
                     ExtractedSprite {
                         original_entity: Some(subject),
-                        transform: GlobalTransform::from_translation(translation),
+                        transform: GlobalTransform::from_translation(
+                            translation.with_z(translation.z - 1.),
+                        ),
                         color: empty_color.0.into(),
                         rect: None,
                         custom_size: Some(inner_size),
@@ -87,13 +95,15 @@ fn extract_status_bars(
             }
 
             if 0.0 < value {
+                println!("spawning bar");
                 let clamped_value = value.clamp(0.0, 1.0);
                 let bar_size = clamped_value * inner_size.x * Vec2::X + inner_size.y * Vec2::Y;
                 let bar_translation =
                     0.5 * size.full_length * (value - 1.0) * Vec3::X + translation;
 
+                let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    subject,
+                    new_entity,
                     ExtractedSprite {
                         original_entity: Some(subject),
                         transform: GlobalTransform::from_translation(bar_translation),

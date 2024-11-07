@@ -11,8 +11,7 @@ description = "draw stat bars that follow sprites"
 [dependencies.bevy]
 version = "0.14"
 default-features = false
-features = ["bevy_render"]
+features = ["bevy_render", "bevy_sprite"]
 
 [dev-dependencies.bevy]
 version = "0.14"
-default-features = true

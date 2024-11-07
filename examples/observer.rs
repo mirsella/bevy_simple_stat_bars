@@ -24,23 +24,25 @@ struct Mp {
 
 fn spawn_player(mut commands: Commands) {
     let player = commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(vec2(32.0, 64.0)),
+        .spawn((
+            SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(vec2(32.0, 64.0)),
+                    ..Default::default()
+                },
                 ..Default::default()
             },
-            ..Default::default()
-        })
-        .insert(Speed(250.0))
-        .insert(PlayerCharacter)
-        .insert(Hp {
-            current: 30,
-            max: 30,
-        })
-        .insert(Mp {
-            current: 12,
-            max: 15,
-        })
+            Speed(250.0),
+            PlayerCharacter,
+            Hp {
+                current: 30,
+                max: 30,
+            },
+            Mp {
+                current: 12,
+                max: 15,
+            },
+        ))
         .id();
 
     commands.spawn((
@@ -138,16 +140,14 @@ fn death(mut commands: Commands, query: Query<(Entity, &Hp)>) {
 }
 
 fn main() {
-    App::new()
-        .insert_resource(ClearColor(css::NAVY.into()))
+    let mut app = App::new();
+    app.insert_resource(ClearColor(css::NAVY.into()))
         .add_plugins(DefaultPlugins)
         .add_plugins(StatBarsPlugin)
         .add_systems(Startup, |mut commands: Commands| {
             commands.spawn(Camera2dBundle::default());
         })
         .add_systems(Startup, spawn_player)
-        .add_systems(Update, move_player)
-        .add_systems(Update, death)
-        .add_systems(Update, update_stats)
+        .add_systems(Update, (move_player, death, update_stats).chain())
         .run();
 }
