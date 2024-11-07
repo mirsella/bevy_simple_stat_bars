@@ -45,9 +45,6 @@ commands
     // position relative to the subject entity (40 units above in this case) (optional)
     StatBarPosition(40.0 * Vec2::Y),
 
-    // don't show the bar if Visibility is Hidden variant
-    StatBarVisibility(Visibility::Hidden),
-
     // takes a |&Component| -> f32 closure, which is called each tick with the
     //      respective component of the subject entity.
     //      returned f32 value is used to update StatBarValue

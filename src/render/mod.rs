@@ -25,7 +25,7 @@ fn extract_status_bars(
             Option<&StatBarZDepth>,
             Option<&StatBarAlignment>,
             Option<&StatBarOrientation>,
-            Option<&StatBarVisibility>,
+            Option<&Visibility>,
         )>,
     >,
 ) {
@@ -43,7 +43,7 @@ fn extract_status_bars(
         visiblity,
     ) in status_bar_query.iter()
     {
-        if let Some(StatBarVisibility(Visibility::Hidden)) = visiblity {
+        if let Some(Visibility::Hidden) = visiblity {
             continue;
         }
         let position = position_option
