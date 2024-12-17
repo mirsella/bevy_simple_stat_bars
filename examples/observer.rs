@@ -25,11 +25,8 @@ struct Mp {
 fn spawn_player(mut commands: Commands) {
     let player = commands
         .spawn((
-            SpriteBundle {
-                sprite: Sprite {
-                    custom_size: Some(vec2(32.0, 64.0)),
-                    ..Default::default()
-                },
+            Sprite {
+                custom_size: Some(vec2(32.0, 64.0)),
                 ..Default::default()
             },
             Speed(250.0),
@@ -99,7 +96,7 @@ fn move_player(
         if keyboard.pressed(KeyCode::KeyW) {
             m += Vec3::Y
         }
-        transform.translation += time.delta_seconds() * player_speed.0 * m.normalize_or_zero();
+        transform.translation += time.delta_secs() * player_speed.0 * m.normalize_or_zero();
     }
 }
 
@@ -109,7 +106,7 @@ fn update_stats(
     keyboard: Res<ButtonInput<KeyCode>>,
     mut players: Query<(&mut Hp, &mut Mp), With<PlayerCharacter>>,
 ) {
-    *cooldown -= time.delta_seconds();
+    *cooldown -= time.delta_secs();
     if 0.0 < *cooldown {
         return;
     } else {
@@ -145,7 +142,7 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_plugins(StatBarsPlugin)
         .add_systems(Startup, |mut commands: Commands| {
-            commands.spawn(Camera2dBundle::default());
+            commands.spawn(Camera2d);
         })
         .add_systems(Startup, spawn_player)
         .add_systems(Update, (move_player, death, update_stats).chain())

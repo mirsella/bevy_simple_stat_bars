@@ -58,7 +58,7 @@ fn observe_components(world: &mut World) {
             .query::<(Entity, &StatBarSubject, &StatBarObserver)>()
             .iter(world)
         {
-            if let Some(entity_ref) = world.get_entity(subject.0) {
+            if let Ok(entity_ref) = world.get_entity(subject.0) {
                 if let Some(value) = observer.inner.observe(entity_ref) {
                     b.0.push((bar, value));
                 }

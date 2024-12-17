@@ -62,7 +62,7 @@ fn extract_status_bars(
 
                 let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    new_entity,
+                    (new_entity, new_entity.into()),
                     ExtractedSprite {
                         original_entity: Some(subject),
                         transform: GlobalTransform::from_translation(
@@ -82,7 +82,7 @@ fn extract_status_bars(
             if let Some(empty_color) = empty_color_option {
                 let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    new_entity,
+                    (new_entity, new_entity.into()),
                     ExtractedSprite {
                         original_entity: Some(subject),
                         transform: GlobalTransform::from_translation(
@@ -107,7 +107,7 @@ fn extract_status_bars(
 
                 let new_entity = commands.spawn_empty().id();
                 extracted_sprites.sprites.insert(
-                    new_entity,
+                    (new_entity, new_entity.into()),
                     ExtractedSprite {
                         original_entity: Some(subject),
                         transform: GlobalTransform::from_translation(bar_translation),
