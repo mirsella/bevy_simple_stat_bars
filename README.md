@@ -1,6 +1,6 @@
 # stat bars
 
-## this fork update this library to bevy 0.14
+## this fork update this library to bevy 0.15, and support Visibility component
 
 Simple library just for drawing stat bars
 above sprites to display their health
