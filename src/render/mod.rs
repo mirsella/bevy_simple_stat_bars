@@ -61,42 +61,44 @@ fn extract_status_bars(
                 let border_size = inner_size + border.thickness * Vec2::ONE;
 
                 let new_entity = commands.spawn_empty().id();
-                extracted_sprites.sprites.insert(
-                    (new_entity, new_entity.into()),
-                    ExtractedSprite {
-                        original_entity: Some(subject),
-                        transform: GlobalTransform::from_translation(
-                            translation.with_z(translation.z - 2.),
-                        ),
-                        color: border.color.into(),
-                        rect: None,
+                extracted_sprites.sprites.push(ExtractedSprite {
+                    main_entity: subject,
+                    render_entity: new_entity,
+                    transform: GlobalTransform::from_translation(
+                        translation.with_z(translation.z - 2.),
+                    ),
+                    color: border.color.into(),
+                    image_handle_id: AssetId::default(),
+                    flip_x: false,
+                    flip_y: false,
+                    kind: bevy::sprite::ExtractedSpriteKind::Single {
+                        anchor: default(),
+                        rect: default(),
+                        scaling_mode: default(),
                         custom_size: Some(border_size),
-                        image_handle_id: AssetId::default(),
-                        flip_x: false,
-                        flip_y: false,
-                        anchor: Default::default(),
                     },
-                );
+                });
             }
 
             if let Some(empty_color) = empty_color_option {
                 let new_entity = commands.spawn_empty().id();
-                extracted_sprites.sprites.insert(
-                    (new_entity, new_entity.into()),
-                    ExtractedSprite {
-                        original_entity: Some(subject),
-                        transform: GlobalTransform::from_translation(
-                            translation.with_z(translation.z - 1.),
-                        ),
-                        color: empty_color.0.into(),
-                        rect: None,
+                extracted_sprites.sprites.push(ExtractedSprite {
+                    main_entity: subject,
+                    render_entity: new_entity,
+                    transform: GlobalTransform::from_translation(
+                        translation.with_z(translation.z - 1.),
+                    ),
+                    color: empty_color.0.into(),
+                    image_handle_id: AssetId::default(),
+                    flip_x: false,
+                    flip_y: false,
+                    kind: bevy::sprite::ExtractedSpriteKind::Single {
+                        anchor: default(),
+                        rect: default(),
+                        scaling_mode: default(),
                         custom_size: Some(inner_size),
-                        image_handle_id: AssetId::default(),
-                        flip_x: false,
-                        flip_y: false,
-                        anchor: Default::default(),
                     },
-                );
+                });
             }
 
             if 0.0 < value {
@@ -106,20 +108,21 @@ fn extract_status_bars(
                     0.5 * size.full_length * (value - 1.0) * Vec3::X + translation;
 
                 let new_entity = commands.spawn_empty().id();
-                extracted_sprites.sprites.insert(
-                    (new_entity, new_entity.into()),
-                    ExtractedSprite {
-                        original_entity: Some(subject),
-                        transform: GlobalTransform::from_translation(bar_translation),
-                        color: color.into(),
-                        rect: None,
+                extracted_sprites.sprites.push(ExtractedSprite {
+                    main_entity: subject,
+                    render_entity: new_entity,
+                    transform: GlobalTransform::from_translation(bar_translation),
+                    color: color.into(),
+                    image_handle_id: AssetId::default(),
+                    flip_x: false,
+                    flip_y: false,
+                    kind: bevy::sprite::ExtractedSpriteKind::Single {
+                        anchor: default(),
+                        rect: default(),
+                        scaling_mode: default(),
                         custom_size: Some(bar_size),
-                        image_handle_id: AssetId::default(),
-                        flip_x: false,
-                        flip_y: false,
-                        anchor: Default::default(),
                     },
-                );
+                });
             }
         }
     }

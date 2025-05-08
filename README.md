@@ -10,7 +10,6 @@ Only goal is to be an easy to use crate that
 you can drop into any project and have stat bars
 in less than ten minutes.
 
-- Targets Bevy 0.8
 - Only supports 2D.
 - Will never be super-customisable or fancy.
 - Only centered, horizontal bars atm.
