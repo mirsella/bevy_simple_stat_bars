@@ -49,7 +49,7 @@ trait ComponentObserver {
     fn observe(&self, entity_ref: EntityRef<'_>) -> Option<f32>;
 }
 
-#[derive(Default, Resource)]
+#[derive(Default, Resource, Deref, DerefMut)]
 struct ValuesBuffer(Vec<(Entity, f32)>);
 
 fn observe_components(world: &mut World) {
@@ -58,15 +58,15 @@ fn observe_components(world: &mut World) {
             .query::<(Entity, &StatBarSubject, &StatBarObserver)>()
             .iter(world)
         {
-            if let Ok(entity_ref) = world.get_entity(subject.0) {
+            if let Ok(entity_ref) = world.get_entity(**subject) {
                 if let Some(value) = observer.inner.observe(entity_ref) {
-                    b.0.push((bar, value));
+                    (*b).push((bar, value));
                 }
             }
         }
-        for (entity, value) in b.0.drain(..) {
+        for (entity, value) in (*b).drain(..) {
             if let Some(mut sb_value) = world.entity_mut(entity).get_mut::<StatBarValue>() {
-                sb_value.0 = value;
+                **sb_value = value;
             }
         }
     });

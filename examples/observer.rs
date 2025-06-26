@@ -7,7 +7,7 @@ use bevy_simple_stat_bars::prelude::*;
 #[component(storage = "SparseSet")]
 struct PlayerCharacter;
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 struct Speed(f32);
 
 #[derive(Component)]
@@ -96,7 +96,7 @@ fn move_player(
         if keyboard.pressed(KeyCode::KeyW) {
             m += Vec3::Y
         }
-        transform.translation += time.delta_secs() * player_speed.0 * m.normalize_or_zero();
+        transform.translation += time.delta_secs() * **player_speed * m.normalize_or_zero();
     }
 }
 

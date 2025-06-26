@@ -7,7 +7,7 @@ use bevy_simple_stat_bars::prelude::*;
 #[component(storage = "SparseSet")]
 struct PlayerCharacter;
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 struct Speed(f32);
 
 #[derive(Component)]
@@ -108,7 +108,7 @@ fn move_player(
         if keyboard.pressed(KeyCode::KeyW) {
             m += Vec3::Y
         }
-        transform.translation += time.delta_secs() * player_speed.0 * m.normalize_or_zero();
+        transform.translation += time.delta_secs() * **player_speed * m.normalize_or_zero();
     }
 }
 
@@ -146,9 +146,9 @@ fn update_bars(
 ) {
     for (hp, mp, bars) in stats.iter_mut() {
         if let Ok((mut hp_bar, visibility)) = stat_bars.get_mut(bars.hp) {
-            hp_bar.0 = hp.current as f32 / hp.max as f32;
+            **hp_bar = hp.current as f32 / hp.max as f32;
             if let Some(mut visibility) = visibility {
-                if hp_bar.0 == 1. {
+                if **hp_bar == 1. {
                     *visibility = Visibility::Hidden
                 } else {
                     *visibility = Visibility::Visible
@@ -157,9 +157,9 @@ fn update_bars(
         }
 
         if let Ok((mut mp_bar, visibility)) = stat_bars.get_mut(bars.mp) {
-            mp_bar.0 = mp.current as f32 / mp.max as f32;
+            **mp_bar = mp.current as f32 / mp.max as f32;
             if let Some(mut visibility) = visibility {
-                if mp_bar.0 == 1. {
+                if **mp_bar == 1. {
                     *visibility = Visibility::Hidden
                 } else {
                     *visibility = Visibility::Visible
