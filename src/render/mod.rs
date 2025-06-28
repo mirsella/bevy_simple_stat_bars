@@ -88,7 +88,7 @@ fn extract_status_bars(
                     transform: GlobalTransform::from_translation(
                         translation.with_z(translation.z - 1.),
                     ),
-                    color: empty_color.0.into(),
+                    color: (**empty_color).into(),
                     image_handle_id: AssetId::default(),
                     flip_x: false,
                     flip_y: false,

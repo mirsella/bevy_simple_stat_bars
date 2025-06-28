@@ -31,7 +31,7 @@ impl Default for StatBarOrientation {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarValue(pub f32);
 
 impl Default for StatBarValue {
@@ -40,7 +40,7 @@ impl Default for StatBarValue {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarColor(pub Color);
 
 impl Default for StatBarColor {
@@ -50,7 +50,7 @@ impl Default for StatBarColor {
 }
 
 /// not used for now
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarAlignment(pub Vec2);
 
 impl Default for StatBarAlignment {
@@ -74,7 +74,7 @@ impl Default for StatBarSize {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarZDepth(pub f32);
 
 impl Default for StatBarZDepth {
@@ -83,7 +83,7 @@ impl Default for StatBarZDepth {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarEmptyColor(pub Color);
 
 impl Default for StatBarEmptyColor {
@@ -92,8 +92,8 @@ impl Default for StatBarEmptyColor {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarSubject(pub Entity);
 
-#[derive(Component)]
+#[derive(Component, Deref, DerefMut)]
 pub struct StatBarPosition(pub Vec2);
